@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ public class MedicineController {
 	@Autowired
 	MedicineService medicineService;
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(
     		value = "",
             method = RequestMethod.PUT,
@@ -29,6 +31,7 @@ public class MedicineController {
     	return new ResponseEntity<String>(medicineService.save(medicine),HttpStatus.OK);
     }
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(
     		value = "/{medicineId}",
             method = RequestMethod.POST,
@@ -37,6 +40,7 @@ public class MedicineController {
     	return new ResponseEntity<String>(medicineService.edit(medicineId,medicine),HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(
     		value = "/{medicineId}",
             method = RequestMethod.DELETE,

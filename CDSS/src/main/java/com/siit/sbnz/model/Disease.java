@@ -17,6 +17,8 @@ public class Disease {
     private Long id;	
     @Column
 	private String diseaseId;
+    @Column
+    private String grupa;
     
     public Disease() {
     }
@@ -33,4 +35,13 @@ public class Disease {
 	public void setDiseaseId(String diseaseId) {
 		this.diseaseId = diseaseId;
 	}
+
+	public String getGrupa() {
+		return grupa;
+	}
+
+	public void setGrupa(String grupa) {
+		this.grupa = grupa;
+	}
+	
 }

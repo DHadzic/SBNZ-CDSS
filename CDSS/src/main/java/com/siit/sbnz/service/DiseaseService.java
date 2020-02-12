@@ -20,10 +20,9 @@ public class DiseaseService {
 	@Autowired
 	SymptomRepository symptomRep;
 	
-	public String save(String diseaseId) {
-		if(diseaseRep.findByDiseaseId(diseaseId) != null) return "Invalid data";
-		Disease disease = new Disease();
-		disease.setDiseaseId(diseaseId);
+	public String save(Disease disease) {
+		if(diseaseRep.findByDiseaseId(disease.getDiseaseId()) != null) return "Invalid data";
+		if(!disease.getGrupa().equals("jedan") || !disease.getGrupa().equals("dva") || !disease.equals("tri")) return "Invalid data";
 		diseaseRep.save(disease);
 		return "Successful";
 	}

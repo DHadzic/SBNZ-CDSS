@@ -1,8 +1,10 @@
 package com.siit.sbnz.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,8 @@ public class Medicine {
     private Long id;	
     @Column
     private String medicineId;
-	@Column
-	private ArrayList<String> supstances;
+    @ElementCollection
+	private List<String> supstances;
 	
 	public Medicine() {
 		supstances = new ArrayList<String>();
@@ -29,10 +31,10 @@ public class Medicine {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public ArrayList<String> getSupstances() {
+	public List<String> getSupstances() {
 		return supstances;
 	}
-	public void setSupstances(ArrayList<String> supstances) {
+	public void setSupstances(List<String> supstances) {
 		this.supstances = supstances;
 	}
 

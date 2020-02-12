@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,9 @@ import com.siit.sbnz.DTOs.UserDTO;
 import com.siit.sbnz.model.User;
 import com.siit.sbnz.security.ForbiddenException;
 import com.siit.sbnz.security.JWTUtils;
-import com.siit.sbnz.security.UserDetailsService;
 import com.siit.sbnz.service.UserService;
 
 @RestController
-@CrossOrigin(value = "http://localhost:4200")
 @RequestMapping("api")
 public class UserController {
 	
@@ -77,6 +76,7 @@ public class UserController {
     	return new ResponseEntity<String>(userService.registerUser(user),HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(
     		value = "/delete/{username}",
             method = RequestMethod.DELETE,

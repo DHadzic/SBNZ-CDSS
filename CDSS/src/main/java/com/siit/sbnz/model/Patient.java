@@ -1,6 +1,7 @@
 package com.siit.sbnz.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -18,7 +19,7 @@ public class Patient {
     @Column
     private String jmbg;
     @ElementCollection
-    private ArrayList<String> allergies;
+    private List<String> allergies;
     
     public Patient() {
     	allergies = new ArrayList<String>();
@@ -35,10 +36,10 @@ public class Patient {
 	public void setJmbg(String jmbg) {
 		this.jmbg = jmbg;
 	}
-	public ArrayList<String> getAllergies() {
+	public List<String> getAllergies() {
 		return allergies;
 	}
-	public void setAllergies(ArrayList<String> allergies) {
+	public void setAllergies(List<String> allergies) {
 		this.allergies = allergies;
 	}
 	public void changeAllergy(String oldAll,String newAll) {

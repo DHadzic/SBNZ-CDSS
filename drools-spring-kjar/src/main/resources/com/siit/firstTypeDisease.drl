@@ -1,0 +1,32 @@
+package com.cdss;
+
+import java.util.List;
+import java.util.ArrayList;
+import com.siit.sbnz.facts.FactSymptom;
+import static com.siit.sbnz.util.StaticMethods.getSymptoms;
+import com.siit.sbnz.model.Diagnose;
+
+declare FactSymptom
+	@role(event)
+end
+
+
+rule "First type disease report"
+	when
+		$f1: FactSymptom($p :patient , $s : symptomId , $d : disease , fired != true, $g :group)
+		$list: ArrayList(size >= 3) from collect(FactSymptom(patient == $p, disease == $d, symptomId != $s, fired != true, group == $g))
+	then
+		$list.size();
+		for(Object l:$list){
+			modify ((FactSymptom)l) { setFired(true); }
+		}
+		ArrayList<String> retVal = new ArrayList<String>();
+		
+		for (Object o:$list) {
+			if(o instanceof FactSymptom) {
+				retVal.add(((FactSymptom) o).getSymptomId());
+			}
+		}
+		retVal.add($s);
+		insert(new Diagnose($p,$d,"",retVal,null));
+end

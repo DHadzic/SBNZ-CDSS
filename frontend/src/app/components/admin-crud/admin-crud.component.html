@@ -1,0 +1,30 @@
+<div class="containter">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2 class="form-signin-heading">Operation over entities</h2>
+        <h2 class="form-signin-heading">Supstance</h2>
+        <form role="form" (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="email"><b>Supstance id</b></label>
+            <input type="text" class="form-control" id="supstanceId" name="supstanceId" [(ngModel)]="supstance.supstanceId" required />
+          </div>
+          <div class="form-group">
+            <label for="password"><b>New supstance id ( edit )</b></label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="supstance.newId" required />
+          </div>
+          <div class="right_padding">
+            <button type="button" class="btn btn btn-success" id="register" (click)="addSupstance()">Add supstance</button>
+          </div>
+          <div class="left_padding">
+            <button type="button" class="btn btn btn-primary" id="login" (click)="editSupstance()">Back to login</button>
+          </div>
+          <div class="left_padding">
+            <button type="button" class="btn btn btn-primary" id="login" (click)="deleteSupstance()">Delete supstance</button>
+          </div>
+        </form>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>
+
